@@ -1,0 +1,30 @@
+<!--pages/bind_class/bind_class.wxml-->
+<t-grid class="block" column="{{3}}">
+  <t-grid-item>
+    <span>年级</span>
+    <t-dropdown-menu>
+    <t-dropdown-item options="{{garde.options}}" value="{{garde.value}}" bindchange="onChangeGarde" />
+    </t-dropdown-menu>
+  </t-grid-item>
+
+  <t-grid-item>
+    <span>系</span>
+    <t-dropdown-menu>
+    <t-dropdown-item options="{{dept.options}}" value="{{dept.value}}" bindchange="onChangeDept" />
+    </t-dropdown-menu>
+  </t-grid-item>
+
+  <t-grid-item>
+    <span>班级</span>
+    <t-dropdown-menu>
+    <t-dropdown-item options="{{class.options}}" value="{{class.value}}" bindchange="onChangeClass" />
+    </t-dropdown-menu>
+  </t-grid-item>
+
+  <t-grid style="margin-top: 1%;" class="block" column="{{1}}">
+    <t-grid-item text="请选择正确的班级，如果选错请联系教务人员">
+    <t-button theme="primary" bindtap = "joinCLass">加入班级</t-button>
+  </t-grid-item>
+  </t-grid>
+
+</t-grid>

@@ -1,0 +1,27 @@
+<!--pages/login/login.wxml-->
+<t-grid style="margin-top: 15%;" class="block" column="{{1}}">
+    <t-row>
+    <t-col offset="8" span="24" t-class="dark">
+        <view class="col">
+            <t-image src="{{imageSrc}}" mode="heightFix" width="72" height="72" aria-label="一个放置在墙角的黄色行李箱" />
+        </view>
+        <view style="margin-top: 5%;" class="text">家里蹲职业技术学院</view>
+    </t-col>
+    </t-row>
+  <t-grid-item text="" >
+    <t-input label="用户名" placeholder="输入用户名" model:value="{{userName}}"></t-input>
+  </t-grid-item>
+  <t-grid-item text="">
+    <t-input label="密码" placeholder="输入密码" type="password" model:value="{{password}}"></t-input>
+  </t-grid-item>
+  <t-grid-item text="">
+    <t-button theme="primary" bindtap = "doLogin">登录</t-button>
+  </t-grid-item>
+  <t-grid-item text="">
+    <t-link size="small" content="注册" bindtap = "turnRegPage" hover />
+  </t-grid-item>
+
+
+</t-grid>
+
+

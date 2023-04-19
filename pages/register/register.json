@@ -1,0 +1,10 @@
+{
+    "component": true,
+    "usingComponents": {
+      "t-col": "tdesign-miniprogram/col/col",
+      "t-row": "tdesign-miniprogram/row/row",
+      "t-image": "tdesign-miniprogram/image/image",
+      "t-message": "tdesign-miniprogram/message/message",
+      "t-link": "tdesign-miniprogram/link/link"
+    }
+}

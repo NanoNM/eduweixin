@@ -1,0 +1,25 @@
+<!--pages/mine/mine.wxml-->
+<t-grid class="block" column="{{2}}" theme="card">
+  <t-grid-item>
+    <text>用户名：{{userName}}</text>
+  </t-grid-item>
+  <t-grid-item>
+    <text>学号：{{userID}}</text>
+  </t-grid-item>
+  <t-grid-item>
+    <text>我的年级：{{grade}}</text>
+  </t-grid-item>
+  <t-grid-item>
+    <text>我的系：{{dept}}</text>
+  </t-grid-item>
+</t-grid>
+
+<t-grid class="block" column="{{1}}" theme="card">
+  <t-cell-group theme="card">
+    <t-cell bindtap="myClass" title="我的班级: {{class}}" hover arrow ></t-cell>
+  </t-cell-group>
+</t-grid>
+
+<t-cell-group theme="card" style="margin-top: 10%;">
+  <t-cell bindtap="logOut" title="登出" leftIcon="user-clear" hover arrow />
+</t-cell-group>

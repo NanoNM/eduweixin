@@ -78,8 +78,8 @@ Page({
                               }
                           )
 
-                          wx.navigateTo({
-                            url: '../index/index',
+                          wx.switchTab({
+                            url: '/pages/index/index',
                           })
                           
                       }

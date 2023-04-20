@@ -26,9 +26,45 @@ App({
       }
     })
   },
+
+
   globalData: {
+    jwtToken:'',
     userInfo: null,
     baseURL:"http://localhost:8080",
     baseWS:"ws://localhost:8080"
+  },
+
+  logOut(){
+    console.log("登出操作");
+    wx.removeStorageSync('jwtToken')
+    wx.removeStorageSync('ms_username')
+    wx.removeStorageSync('classid')
+
+    const axios = require('axios');
+
+let config = {
+  method: 'get',
+  maxBodyLength: Infinity,
+  url: this.globalData.baseURL+'/user/lgout',
+  headers: { 
+    'token': this.globalData.jwtToken
   }
+  };
+
+  axios.request(config)
+  .then((response) => {
+    console.log(JSON.stringify(response.data));
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+
+
+    this.globalData.jwtToken = ''
+    wx.navigateTo({
+      url: '/pages/login/login',
+    })
+
+  },
 })

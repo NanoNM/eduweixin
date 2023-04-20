@@ -4,18 +4,19 @@ const app = getApp()
 
 Page({
     data: {
-        value: 'label_1',
+        value: 'index',
         list: [
-          { value: 'label_1', icon: 'home', ariaLabel: '首页' },
-          { value: 'label_2', icon: 'app', ariaLabel: '软件' },
-          { value: 'label_3', icon: 'chat', ariaLabel: '聊天' },
-          { value: 'label_4', icon: 'user', ariaLabel: '我的' },
+          { value: 'index', icon: 'home', ariaLabel: '首页' },
+          { value: 'class', icon: 'app', ariaLabel: '软件' },
+          { value: 'exam', icon: 'chat', ariaLabel: '聊天' },
+          { value: 'my', icon: 'user', ariaLabel: '我的' },
         ],
       },
       onChange(e) {
         this.setData({
           value: e.detail.value,
         });
+        wx.switchTab('/pages/login')
       },
   // 登出处理函数
   doLoginOut(){
@@ -32,42 +33,48 @@ Page({
       url: '../logs/logs'
     })
   },
+  onShow() {
+    if (typeof this.getTabBar === 'function' && this.getTabBar()) {
+      const page = getCurrentPages().pop();
+      this.getTabBar().setData({
+        value: '/' + page.route
+      })
+    }
+   // 判断jwt是否存在切合法
+   wx.getStorage({
+    key: 'jwtToken',
+    success (res) {
+    },
+    fail(res){
+        wx.navigateTo({
+            url: '../login/login',
+          })
+    }
+  })
+  // 判断学生是否绑定班级
+  wx.getStorage({
+    key: 'classid',
+    success (res) {
+       if (res.data==null) {
+        wx.navigateTo({
+            url: '../bind_class/bind_class',
+          })
+       }
+    },
+    fail(res){
+        wx.navigateTo({
+            url: '../bind_class/bind_class',
+          })
+    }
+  })
+
+  wx.showToast({
+    title: "登陆成功",
+    icon: 'success',
+    duration: 2000
+  })
+  },
   onLoad() {
-      // 判断jwt是否存在切合法
-    wx.getStorage({
-        key: 'jwtToken',
-        success (res) {
-            
-        },
-        fail(res){
-            wx.navigateTo({
-                url: '../login/login',
-              })
-        }
-      })
-      // 判断学生是否绑定班级
-      wx.getStorage({
-        key: 'classid',
-        success (res) {
-           if (res.data==null) {
-            wx.navigateTo({
-                url: '../bind_class/bind_class',
-              })
-           }
-        },
-        fail(res){
-            wx.navigateTo({
-                url: '../bind_class/bind_class',
-              })
-        }
-      })
-
-      wx.showToast({
-        title: "登陆成功",
-        icon: 'success',
-        duration: 2000
-      })
-
     if (wx.getUserProfile) {
       this.setData({
         canIUseGetUserProfile: true

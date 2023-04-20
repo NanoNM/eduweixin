@@ -1,0 +1,5 @@
+/* pages/mine/mine.wxss */
+.block {
+  display: block;
+  margin-bottom: 32rpx;
+}

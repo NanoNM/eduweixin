@@ -11,6 +11,12 @@ Page({
     gardname:'null'
   },
 
+  jamp2Curriculum(){
+    wx.navigateTo({
+      url: '/pages/myclass/curriculum/curriculum',
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */

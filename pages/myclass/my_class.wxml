@@ -1,31 +1,16 @@
 <t-collapse theme="card" defaultValue="{{[0]}}" expandMutex expandIcon>
 <text>我的班级：{{classname}}</text>
-  <t-collapse-panel header="折叠面板标题" value="{{0}}">
-    此处可自定义内容此处可自定义内容此处可自定义内容此处可自定义内容此处可自定义内容此处可自定义内容此处可自定义内容此处可自定义内容
+  <t-collapse-panel header="班级成员" value="{{0}}">
   </t-collapse-panel>
-  <t-collapse-panel header="折叠面板标题" value="{{1}}">
-    此处可自定义内容此处可自定义内容此处可自定义内容此处可自定义内容此处可自定义内容此处可自定义内容此处可自定义内容此处可自定义内容
-  </t-collapse-panel>
-  <t-collapse-panel header="折叠面板标题" value="{{2}}">
-    此处可自定义内容此处可自定义内容此处可自定义内容此处可自定义内容此处可自定义内容此处可自定义内容此处可自定义内容此处可自定义内容
-  </t-collapse-panel>
-  <t-collapse-panel header="折叠面板标题" disabled value="{{3}}">
-    此处可自定义内容此处可自定义内容此处可自定义内容此处可自定义内容此处可自定义内容此处可自定义内容此处可自定义内容此处可自定义内容
+  <t-collapse-panel header="我的课表" value="{{1}}">
+    <t-cell-group theme="card">
+      <t-cell bindtap="jamp2Curriculum" title="2023 下半" leftIcon="bulletpoint" hover arrow />
+    </t-cell-group>
   </t-collapse-panel>
 </t-collapse>
 
 <t-collapse  theme="card" defaultValue="{{[0]}}" expandMutex expandIcon>
 <text>我的课程：{{deptname}} {{gardname}}</text>
-  <t-collapse-panel header="折叠面板标题" value="{{0}}">
-    此处可自定义内容此处可自定义内容此处可自定义内容此处可自定义内容此处可自定义内容此处可自定义内容此处可自定义内容此处可自定义内容
-  </t-collapse-panel>
-  <t-collapse-panel header="折叠面板标题" value="{{1}}">
-    此处可自定义内容此处可自定义内容此处可自定义内容此处可自定义内容此处可自定义内容此处可自定义内容此处可自定义内容此处可自定义内容
-  </t-collapse-panel>
-  <t-collapse-panel header="折叠面板标题" value="{{2}}">
-    此处可自定义内容此处可自定义内容此处可自定义内容此处可自定义内容此处可自定义内容此处可自定义内容此处可自定义内容此处可自定义内容
-  </t-collapse-panel>
-  <t-collapse-panel header="折叠面板标题" disabled value="{{3}}">
-    此处可自定义内容此处可自定义内容此处可自定义内容此处可自定义内容此处可自定义内容此处可自定义内容此处可自定义内容此处可自定义内容
+  <t-collapse-panel header="当期课程" value="{{0}}">
   </t-collapse-panel>
 </t-collapse>

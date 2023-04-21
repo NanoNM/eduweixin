@@ -17,7 +17,7 @@ Component({
       icon: 'home',
       label: '首页',
     }, {
-      value: '/pages/testPage/test',
+      value: '/pages/myclass/my_class',
       icon: 'usergroup',
       label: '班级',
     },{

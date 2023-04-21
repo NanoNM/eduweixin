@@ -6,7 +6,8 @@
     "pages/register/register",
     "pages/bind_class/bind_class",
     "pages/testPage/test",
-    "pages/mine/mine"
+    "pages/mine/mine",
+    "pages/myclass/my_class"
   ],
   "tabBar": {
     "custom": true,
@@ -14,6 +15,10 @@
       {
         "pagePath": "pages/index/index",
         "text": "首页"
+      },
+      {
+        "pagePath": "pages/myclass/my_class",
+        "text": "班级"
       },
       {
         "pagePath": "pages/testPage/test",

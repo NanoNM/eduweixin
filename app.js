@@ -15,9 +15,14 @@ App({
     // })
 
     // 展示本地存储能力
-    const logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
+    // const logs = wx.getStorageSync('logs') || []
+    // logs.unshift(Date.now())
+    // wx.setStorageSync('logs', logs)
+
+    const userInfo = wx.getStorageSync('userInfo') || []
+
+    this.globalData.userInfo = userInfo
+
 
     // 登录
     wx.login({

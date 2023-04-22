@@ -1,6 +1,16 @@
 <t-collapse theme="card" defaultValue="{{[0]}}" expandMutex expandIcon>
 <text>我的班级：{{classname}}</text>
   <t-collapse-panel header="班级成员" value="{{0}}">
+    <t-cell-group theme="card">
+    老师
+      <t-cell title="尼基塔" leftIcon="user" hover  />
+    </t-cell-group>
+    <t-cell-group theme="card">
+    同学
+      <t-cell title="单行标题" leftIcon="user" hover  />
+      <t-cell title="单行标题" leftIcon="user" hover  />
+      <t-cell title="单行标题" leftIcon="user" hover  />
+    </t-cell-group>
   </t-collapse-panel>
   <t-collapse-panel header="我的课表" value="{{1}}">
     <t-cell-group theme="card">

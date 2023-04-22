@@ -16,12 +16,12 @@ Page({
     },
     class: {
       value: '',
-      options: [],
+        options: [],
     },
     dept: {
-        value: '',
-        options: [],
-      },
+      value: '',
+      options: [],
+    },
   },
 
   onChangeGarde(e) {
@@ -39,172 +39,166 @@ Page({
   },
 
   onChangeClass(e) {
-      console.log(1);
+    console.log(1);
     this.setData({
       'class.value': e.detail.value,
     });
   },
 
-  joinCLass(){
-      
-      if (this.data.garde.value == '' || this.data.class.value == '' || this.data.dept.value == '') {
-        wx.showToast({
-            title: "操作失败",
-            icon: 'error',
-            duration: 2000
-          })
-          return
-      }
-      var that = this
-      wx.getStorage({
-        key: 'jwtToken',
-        success (res) {
-            let config = {
-                method: 'get',
-                maxBodyLength: Infinity,
-                url: 'http://localhost:8080/class/joinclass?class='+that.data.class.value,
-                headers: { 
-                    'token': res.data
-                  }
-                  };
-              
-                  axios.request(config)
-                  .then((response) => {
-                      if (response.data['status'] == 'OK') {
-                          wx.setStorage(
-                              {
-                                key:"classid",
-                                data:that.data.class.value
-                              }
-                          )
+  joinCLass() {
 
-                          wx.switchTab({
-                            url: '/pages/index/index',
-                          })
-                          
-                      }
-                  })
-                  .catch((error) => {
-                  console.log(error);
-                  });
-    },
-    fail(res){
-    
+    if (this.data.garde.value == '' || this.data.class.value == '' || this.data.dept.value == '') {
+      wx.showToast({
+        title: "操作失败",
+        icon: 'error',
+        duration: 2000
+      })
+      return
     }
-  })
+    var that = this
+    wx.getStorage({
+      key: 'jwtToken',
+      success(res) {
+        let config = {
+          method: 'get',
+          maxBodyLength: Infinity,
+          url: 'http://localhost:8080/class/joinclass?class=' + that.data.class.value,
+          headers: {
+            'token': res.data
+          }
+        };
+
+        axios.request(config)
+          .then((response) => {
+            if (response.data['status'] == 'OK') {
+              wx.setStorage({
+                key: "classid",
+                data: that.data.class.value
+              })
+
+              wx.switchTab({
+                url: '/pages/index/index',
+              })
+
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      },
+      fail(res) {
+
+      }
+    })
   },
 
-  getClasses(){
-      this.setData(
-          {
-            class:{
-                value:  '',
-                options: {
-                    value:'',
-                    label:''
-                }
+  getClasses() {
+    this.setData({
+      class: {
+        value: '',
+          options: {
+            value: '',
+            label: ''
           }
-        }
-      )
+      }
+    })
     // 获取班级数据
     let config2 = {
       method: 'get',
       maxBodyLength: Infinity,
-      url: 'http://localhost:8080/class/classes?grade='+this.data.garde.value+'&dept='+this.data.dept.value,
-        headers: { }
-      };
+      url: 'http://localhost:8080/class/classes?grade=' + this.data.garde.value + '&dept=' + this.data.dept.value,
+      headers: {}
+    };
 
-      axios.request(config2)
+    axios.request(config2)
       .then((response) => {
-    
-        
-        if (response.data['data']['data']['classes'].length==0) {
-            this.setData(
-                {
-                  class:{
-                      value:  '',
-                      options: {
-                          value:'',
-                          label:''
-                      }
+
+
+        if (response.data['data']['data']['classes'].length == 0) {
+          this.setData({
+            class: {
+              value: '',
+                options: {
+                  value: '',
+                  label: ''
                 }
-              }
-            )
+            }
+          })
         }
         this.setData({
-            class:{
-                value:  response.data['data']['data']['classes'][0]!=null?response.data['data']['data']['classes'][0]['id']:'',
-                options: response.data['data']['data']['classes'].map(element => {
-                    return {
-                        value: element['id']!=null? element['id']:'',
-                        label: element['className']!=null? element['className']:''
-                    }
-                })
+          class: {
+            value: response.data['data']['data']['classes'][0] != null ? response.data['data']['data']['classes'][0]['id'] : '',
+              options: response.data['data']['data']['classes'].map(element => {
+                return {
+                  value: element['id'] != null ? element['id'] : '',
+                  label: element['className'] != null ? element['className'] : ''
                 }
+              })
+          }
         })
       })
       .catch((error) => {
-      console.log(error);
+        console.log(error);
       });
-},
+  },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-      // 年级数据初始化
+    // 年级数据初始化
     let config = {
-    method: 'get',
-    maxBodyLength: Infinity,
-    url: 'http://localhost:8080/grades?status=normal',
-    headers: { }
+      method: 'get',
+      maxBodyLength: Infinity,
+      url: 'http://localhost:8080/grades?status=normal',
+      headers: {}
     };
     axios.request(config)
-    .then((response) => {
+      .then((response) => {
         this.setData({
-            garde:{
-            value:  response.data['data'][0]['gradeName'],
+          garde: {
+            value: response.data['data'][0]['gradeName'],
             options: response.data['data'].map(element => {
-                return {
-                    value: element['gradeName'],
-                    label: element['gradeName']
-                }
+              return {
+                value: element['gradeName'],
+                label: element['gradeName']
+              }
             })
-            }
-        })    
+          }
+        })
         this.getClasses()
-    })
-    .catch((error) => {
+      })
+      .catch((error) => {
         console.log(error);
-    });
+      });
 
     // 系数据初始化
     let configx = {
-    method: 'get',
-    maxBodyLength: Infinity,
-    url: 'http://localhost:8080/depts',
-    headers: { }
+      method: 'get',
+      maxBodyLength: Infinity,
+      url: 'http://localhost:8080/depts',
+      headers: {}
     };
 
     axios.request(configx)
-    .then((response) => {
+      .then((response) => {
         console.log(response.data['data']);
         this.setData({
-            dept:{
-            value:  response.data['data'][0]['id'],
+          dept: {
+            value: response.data['data'][0]['id'],
             options: response.data['data'].map(element => {
-                return {
-                    value: element['id'],
-                    label: element['deptName']
-                }
+              return {
+                value: element['id'],
+                label: element['deptName']
+              }
             })
-            }
-        })  
+          }
+        })
         this.getClasses()
-    })
-    .catch((error) => {
-    console.log(error);
-    });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
 
 
   },

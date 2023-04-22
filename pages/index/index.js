@@ -66,8 +66,8 @@ Page({
             url: '../bind_class/bind_class',
           })
     }
+    
   })
-
   wx.showToast({
     title: "登陆成功",
     icon: 'success',

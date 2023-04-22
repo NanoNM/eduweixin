@@ -17,8 +17,8 @@ Page({
     monthNum: 1,
     week: ['日', '一', '二', '三', '四', '五', '六'], // 周日为起始日
     nowDay: [1, 2, 3, 4, 5, 6, 7], // 本周的七天日期
-    schoolTime: ['2022', '02', '28'], // 本学期开学时间
-    nowWeek: '', // 当前周
+    schoolTime: ['2021', '02', '28'], // 本学期开学时间
+    nowWeek: '1', // 当前周
     course_time: [
       ['', ''],
       ['', ''],
@@ -37,8 +37,8 @@ Page({
       [ //第一周 
         {
           "id": 1,
-          "isToday": 1,
-          "jie": 7,
+          "isToday": 6,
+          "jie": 1,
           "classNumber": 2,
           "name": "算法设计与分析",
           "address": "2306"
@@ -59,11 +59,10 @@ Page({
           "name": "毛概",
           "address": "6202"
         },
-
         {
           "id": 4,
           "isToday": 2,
-          "jie": 3,
+          "jie": 1,
           "classNumber": 2,
           "name": "Matlab",
           "address": "2306"

@@ -8,7 +8,9 @@
     "pages/testPage/test",
     "pages/mine/mine",
     "pages/myclass/my_class",
-    "pages/myclass/curriculum/curriculum"
+    "pages/myclass/curriculum/curriculum",
+    "pages/mine/student-reg-info/info",
+    "pages/myclass/course-selection/index"
   ],
   "tabBar": {
     "custom": true,

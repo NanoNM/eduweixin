@@ -1,26 +1,36 @@
 <t-collapse theme="card" defaultValue="{{[0]}}" expandMutex expandIcon>
-<text>我的班级：{{classname}}</text>
-  <t-collapse-panel header="班级成员" value="{{0}}">
+  <t-collapse-panel header="班级成员：{{classname}}" value="{{0}}">
     <t-cell-group theme="card">
-    老师
-      <t-cell title="尼基塔" leftIcon="user" hover  />
+    辅导员：
+      <t-cell title="{{counsellor.name}}" leftIcon="user" hover  />
     </t-cell-group>
     <t-cell-group theme="card">
-    同学
-      <t-cell title="单行标题" leftIcon="user" hover  />
-      <t-cell title="单行标题" leftIcon="user" hover  />
-      <t-cell title="单行标题" leftIcon="user" hover  />
+    同学：
+    <block wx:for="{{studentsData}}" wx:for-index="index" wx:for-item="student" wx:key="index">
+      <t-cell  title="{{student.name}}"  leftIcon="user" hover  />
+    </block>
     </t-cell-group>
   </t-collapse-panel>
-  <t-collapse-panel header="我的课表" value="{{1}}">
+  <t-collapse-panel header="我的课表  {{deptname}} {{gardname}}" value="{{0}}">
     <t-cell-group theme="card">
-      <t-cell bindtap="jamp2Curriculum" title="2023 下半" leftIcon="bulletpoint" hover arrow />
+      <t-cell bindtap="jamp2Curriculum" title="{{classname}} 课表" leftIcon="bulletpoint" hover arrow />
     </t-cell-group>
   </t-collapse-panel>
 </t-collapse>
 
 <t-collapse  theme="card" defaultValue="{{[0]}}" expandMutex expandIcon>
-<text>我的课程：{{deptname}} {{gardname}}</text>
-  <t-collapse-panel header="当期课程" value="{{0}}">
+
+  <t-collapse-panel header="我的课程" value="{{0}}">
+    <t-cell-group theme="card">
+      <t-cell bindtap="jamp2Select" title="前去选课" leftIcon="add" hover arrow />
+    </t-cell-group>
+    <t-cell title="形势与政策 必修" leftIcon="check" hover  />
+    <t-cell title="C语言程序设计 专业必修" leftIcon="check" hover  />
+    <t-cell title="艺术鉴赏 选修" leftIcon="check" hover  />
+    <t-cell title="电子竞技 选修 (被驳回) 点击删除" leftIcon="error" hover  />
+    <t-cell title="运动健康 选修 (审核中)" leftIcon="help" hover  />
   </t-collapse-panel>
+    <t-cell title="" leftIcon="" hover  />
+    <t-cell title="" leftIcon="" hover  />
+    <t-cell title="" leftIcon="" hover  />
 </t-collapse>

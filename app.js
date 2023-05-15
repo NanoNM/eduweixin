@@ -36,7 +36,7 @@ App({
   globalData: {
     jwtToken:'',
     userInfo: null,
-    baseURL:"http://localhost:8080",
+    baseURL:"http://192.168.0.106:8080",
     baseWS:"ws://localhost:8080"
   },
 
@@ -45,7 +45,8 @@ App({
     wx.removeStorageSync('jwtToken')
     wx.removeStorageSync('ms_username')
     wx.removeStorageSync('classid')
-
+    wx.removeStorageSync('userInfo')
+    this.globalData.userInfo  = null;
     const axios = require('axios');
 
 let config = {

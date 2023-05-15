@@ -28,7 +28,7 @@ Page({
     let config = {
       method: 'post',
       maxBodyLength: Infinity,
-      url: 'http://localhost:8080/user/login?username=' + this.data.userName + '&password=' + this.data.password,
+      url: app.globalData.baseURL + '/user/login?username=' + this.data.userName + '&password=' + this.data.password,
       headers: {
         'Content-Type': 'application/json'
       },
@@ -49,7 +49,7 @@ Page({
               let config = {
                 method: 'get',
                 maxBodyLength: Infinity,
-                url: 'http://localhost:8080/user/info?s=all',
+                url: app.globalData.baseURL + '/user/info?s=all',
                 headers: {
                   'token': app.globalData.jwtToken
                 }
@@ -69,6 +69,7 @@ Page({
                     key: 'userInfo',
                     data: response.data['data']
                   })
+                  app.globalData.userInfo = response.data['data']
                   wx.switchTab({
                     url: '/pages/index/index',
                   })

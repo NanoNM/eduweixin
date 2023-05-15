@@ -1,5 +1,10 @@
 var colors = require('../../../utils/colors.js')
-const app = getApp()
+import axios from 'axios'
+import mpAdapter from 'axios-miniprogram-adapter'
+import {
+  forEach
+} from '../../../utils/colors.js';
+var app = getApp();
 
 Page({
 
@@ -17,7 +22,7 @@ Page({
     monthNum: 1,
     week: ['日', '一', '二', '三', '四', '五', '六'], // 周日为起始日
     nowDay: [1, 2, 3, 4, 5, 6, 7], // 本周的七天日期
-    schoolTime: ['2021', '02', '28'], // 本学期开学时间
+    schoolTime: ['2023', '02', '8'], // 本学期开学时间
     nowWeek: '1', // 当前周
     course_time: [
       ['', ''],
@@ -34,100 +39,27 @@ Page({
       ['', ''],
     ],
     wList: [
-      [ //第一周 
-        {
-          "id": 1,
-          "isToday": 6,
-          "jie": 1,
-          "classNumber": 2,
-          "name": "算法设计与分析",
-          "address": "2306"
-        },
-        {
-          "id": 2,
-          "isToday": 1,
-          "jie": 1,
-          "classNumber": 2,
-          "name": "操作系统",
-          "address": "5409"
-        },
-        {
-          "id": 3,
-          "isToday": 1,
-          "jie": 3,
-          "classNumber": 2,
-          "name": "毛概",
-          "address": "6202"
-        },
-        {
-          "id": 4,
-          "isToday": 2,
-          "jie": 1,
-          "classNumber": 2,
-          "name": "Matlab",
-          "address": "2306"
-        },
-        {
-          "id": 5,
-          "isToday": 2,
-          "jie": 5,
-          "classNumber": 2,
-          "name": "数据库原理及应用",
-          "address": "1104"
-        },
-        {
-          "id": 7,
-          "isToday": 2,
-          "jie": 7,
-          "classNumber": 2,
-          "name": "数学建模",
-          "address": "1215"
-        },
-
-        {
-          "id": 6,
-          "isToday": 3,
-          "jie": 3,
-          "classNumber": 2,
-          "name": "计算机网络",
-          "address": "5102"
-        },
-        {
-          "id": 2,
-          "isToday": 3,
-          "jie": 7,
-          "classNumber": 2,
-          "name": "操作系统",
-          "address": "5409"
-        },
-
-        {
-          "id": 3,
-          "isToday": 4,
-          "jie": 1,
-          "classNumber": 2,
-          "name": "毛概",
-          "address": "6202"
-        },
-        {
-          "id": 6,
-          "isToday": 4,
-          "jie": 5,
-          "classNumber": 2,
-          "name": "计算机网络",
-          "address": "2304"
-        },
-
-        {
-          "id": 1,
-          "isToday": 5,
-          "jie": 3,
-          "classNumber": 2,
-          "name": "算法设计与分析",
-          "address": "5506"
-        },
-      ],
-    
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
     ]
   },
 
@@ -135,18 +67,33 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let nowWeek = this.getNowWeek()
-    let nowDay = this.getDayOfWeek(nowWeek)
-    let pageNum = nowWeek - 1
-    let month = this.getMonth((nowWeek - 1) * 7);
-    this.data.todayMonth
-    this.setData({
-      nowWeek,
-      nowDay,
-      pageNum,
-      todayWeek: nowWeek,
-      monthNum: month / 1, // 当前月份数字类型，用于数字运算
-      colorArrays: colors // 课表颜色
+    // 获取开课日期
+    var that = this
+    wx.request({
+      url: app.globalData.baseURL + '/grade/optime?grade=uc_2023', //仅为示例，并非真实的接口地址
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success(res) {
+        console.log(that.data.schoolTime)
+        that.data.schoolTime = res.data['data']
+        console.log(res.data['data'])
+        let nowWeek = that.getNowWeek()
+        let nowDay = that.getDayOfWeek(nowWeek)
+        let pageNum = nowWeek - 1
+        let month = that.getMonth((nowWeek - 1) * 7);
+        that.data.todayMonth
+        that.setData({
+          nowWeek,
+          nowDay,
+          pageNum,
+          todayWeek: nowWeek,
+          monthNum: month / 1, // 当前月份数字类型，用于数字运算
+          colorArrays: colors // 课表颜色
+        })
+
+        that.getCourseList()
+      }
     })
   },
 
@@ -194,9 +141,52 @@ Page({
     return day
   },
 
+
   // 获取课表数据
   async getCourseList() {
+    console.log("====" + this.getNowWeek());
+    let that = this;
+    wx.getStorage({
+      key: 'classid',
+      success(res) {
+        let config = {
+          method: 'get',
+          maxBodyLength: Infinity,
+          url: app.globalData.baseURL + '/course/get?classid=' + res.data + '&nowweek=' + that.getNowWeek(),
+          headers: {}
+        };
 
+        axios.request(config)
+          .then((response) => {
+            console.log();
+            var dataList=[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+            response.data['data'].forEach(it => {
+              var data = {
+                "id": that.data.wList[it.weekTimes-1].length+1,
+                "isToday": it.week,
+                "jie": it.startClass ,
+                "classNumber": it.endClass - it.startClass + 1,
+                "name": it.courseName,
+                "address": it.local,
+                "teacher": "null"
+              };
+              dataList[it.weekTimes-1].push(data);
+              that.setData({
+                wList:dataList
+              })
+
+            }
+            )
+            // that.wList[]
+            // that.setData({
+            //   wList:
+            // })
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    })
   },
 
   // 点击切换导航的回调
@@ -230,6 +220,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+
 
   },
 

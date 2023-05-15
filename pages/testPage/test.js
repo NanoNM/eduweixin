@@ -1,11 +1,15 @@
 // pages/testPage/test.js
+import axios from 'axios'
+import mpAdapter from 'axios-miniprogram-adapter'
+var app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    classExamNotification:'',
+    myExamResults:[],
   },
 
   /**
@@ -34,6 +38,48 @@ Page({
         value: '/' + page.route
       })
     }
+    var that = this;
+    wx.getStorage({
+      key:'classid',
+      success (res) {
+        let config = {
+          method: 'get',
+          maxBodyLength: Infinity,
+          url: app.globalData.baseURL + '/exam/exam?class='+res.data,
+          headers: { }
+        };
+        axios.request(config)
+        .then((response) => {
+          that.setData({
+            classExamNotification:response.data['data']
+          })
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    
+      }})
+      var that = this
+      let config = {
+        method: 'get',
+        maxBodyLength: Infinity,
+        url: 'http://localhost:8080/exam/getResults?studentid=' + app.globalData.userInfo.employeeId,
+        headers: { }
+      };
+      
+      axios.request(config)
+      .then((response) => {
+        that.setData({
+          myExamResults: response.data['data']
+        })
+
+        console.log(this.data.myExamResults);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+
   },
 
   /**

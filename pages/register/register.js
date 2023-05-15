@@ -2,6 +2,7 @@
 import axios from 'axios'
 import mpAdapter from 'axios-miniprogram-adapter'
 axios.defaults.adapter = mpAdapter
+var app = getApp()
 
 Page({
 
@@ -28,7 +29,7 @@ Page({
     let config = {
       method: 'post',
       maxBodyLength: Infinity,
-      url: 'http://localhost:8080/student/reg',
+      url: app.globalData.baseURL + '/student/reg',
       headers: { 
         'Content-Type': 'application/json'
       },

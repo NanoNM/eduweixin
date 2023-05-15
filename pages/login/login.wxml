@@ -5,7 +5,7 @@
         <view class="col">
             <t-image src="{{imageSrc}}" mode="heightFix" width="72" height="72" aria-label="一个放置在墙角的黄色行李箱" />
         </view>
-        <view style="margin-top: 5%;" class="text">家里蹲职业技术学院</view>
+        <view style="margin-top: 5%;" class="text">XXXXXXX技术学院</view>
     </t-col>
     </t-row>
   <t-grid-item text="" >
@@ -20,8 +20,6 @@
   <t-grid-item text="">
     <t-link size="small" content="注册" bindtap = "turnRegPage" hover />
   </t-grid-item>
-
-
 </t-grid>
 
 

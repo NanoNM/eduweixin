@@ -1,5 +1,7 @@
 // index.js
 // 获取应用实例
+import axios from 'axios'
+import mpAdapter from 'axios-miniprogram-adapter'
 const app = getApp()
 
 Page({
@@ -11,6 +13,7 @@ Page({
           { value: 'exam', icon: 'chat', ariaLabel: '聊天' },
           { value: 'my', icon: 'user', ariaLabel: '我的' },
         ],
+        notices:[]
       },
       onChange(e) {
         this.setData({
@@ -33,6 +36,26 @@ Page({
       url: '../logs/logs'
     })
   },
+  jamp2Curriculum(){
+    wx.navigateTo({
+      url: '/pages/myclass/curriculum/curriculum',
+    })
+  },
+  jamp2Exam(){
+    wx.switchTab({
+      url: '/pages/testPage/test',
+    })
+  },
+  jamp2eduInfo(){
+    wx.navigateTo({
+      url: '/pages/mine/student-reg-info/info',
+    })
+  },
+  jamp2selectCorse(){
+    wx.navigateTo({
+      url: '/pages/myclass/course-selection/index',
+    })
+  },
   onShow() {
     if (typeof this.getTabBar === 'function' && this.getTabBar()) {
       const page = getCurrentPages().pop();
@@ -40,10 +63,30 @@ Page({
         value: '/' + page.route
       })
     }
+    var that = this;
    // 判断jwt是否存在切合法
    wx.getStorage({
     key: 'jwtToken',
     success (res) {
+      let config = {
+        method: 'get',
+        maxBodyLength: Infinity,
+        url: 'http://localhost:8080/admin/edunotices',
+        headers: {
+
+         }
+      };
+      
+      axios.request(config)
+      .then((response) => {
+        that.setData({
+          notices:response.data["data"]
+        })
+        console.log(that.data.notices);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     },
     fail(res){
         wx.navigateTo({
@@ -55,7 +98,7 @@ Page({
   wx.getStorage({
     key: 'classid',
     success (res) {
-       if (res.data==null) {
+       if (res.data==-1) {
         wx.navigateTo({
             url: '../bind_class/bind_class',
           })
@@ -73,6 +116,8 @@ Page({
     icon: 'success',
     duration: 2000
   })
+
+  
   },
   onLoad() {
     if (wx.getUserProfile) {

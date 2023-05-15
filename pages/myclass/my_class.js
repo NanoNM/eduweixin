@@ -1,4 +1,7 @@
 // pages/myclass/my_class.js
+import axios from 'axios'
+import mpAdapter from 'axios-miniprogram-adapter'
+axios.defaults.adapter = mpAdapter
 var app = getApp()
 Page({
 
@@ -8,12 +11,20 @@ Page({
   data: {
     classname:'null',
     deptname:'null',
-    gardname:'null'
+    gardname:'null',
+
+    studentsData:'',
+    counsellor:''
   },
 
   jamp2Curriculum(){
     wx.navigateTo({
       url: '/pages/myclass/curriculum/curriculum',
+    })
+  },
+  jamp2Select(){
+    wx.navigateTo({
+      url: '/pages/myclass/course-selection/index',
     })
   },
 
@@ -49,6 +60,50 @@ Page({
       gardname:app.globalData.userInfo['gradeName']
     })
 
+    // 班级ID取老师和学生
+    var that = this;
+    // 获取班级同学
+    wx.getStorage({
+      key:'classid',
+      success (res) {
+        let config1 = {
+          method: 'get',
+          maxBodyLength: Infinity,
+          url: app.globalData.baseURL + '/student/getStudents?classid='+res.data,
+          headers: { }
+        };
+        axios.request(config1)
+        .then((response) => {
+          that.setData({
+            studentsData: response.data['data']
+          })
+          console.log(that.data.studentsData);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+
+        // 获取辅导员
+    let config = {
+      method: 'get',
+      maxBodyLength: Infinity,
+      url: app.globalData.baseURL + '/class/getcounsellor?id='+res.data,
+      headers: { }
+    };
+
+    axios.request(config)
+    .then((response) => {
+      that.setData({
+            counsellor: response.data['data']
+      })
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+        
+      }
+    })
   },
 
   /**

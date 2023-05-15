@@ -1,0 +1,50 @@
+<!--pages/mine/mine.wxml-->
+<t-grid class="block" column="{{1}}" theme="card">
+  <t-grid-item>
+    <t-avatar class="avatar-example" image="{{img1}}" />
+  </t-grid-item>
+</t-grid>
+
+<t-grid class="block" column="{{2}}" theme="card">
+  <t-grid-item>
+    <t-cell title="性名：" description="{{studentInfo.stuName}}" hover />
+  </t-grid-item>
+  <t-grid-item>
+    <t-cell title="性别：" description="{{studentInfo.stuGender}}" hover />
+  </t-grid-item>
+  <t-grid-item>
+    <t-cell title="出生日期：" description="{{studentInfo.stuBirthday}}" hover />
+  </t-grid-item>
+  <t-grid-item>
+    <t-cell title="民族：" description="{{studentInfo.stuNation}}" hover />
+  </t-grid-item>
+</t-grid>
+<t-grid class="block" column="{{2}}" theme="card">
+  <t-grid-item>
+    <t-cell title="证件号码：" description="{{studentInfo.stuId}}" hover />
+  </t-grid-item>
+  <t-grid-item>
+    <t-cell title="院校：" description="{{studentInfo.stuSchool}}" hover />
+  </t-grid-item>
+</t-grid>
+
+<t-grid class="block" column="{{2}}" theme="card">
+  <t-grid-item>
+    <t-cell title="层次：" description="{{studentInfo.levels}}" hover />
+  </t-grid-item>
+  <t-grid-item>
+    <t-cell title="专业：" description="{{studentInfo.major}}" hover />
+  </t-grid-item>
+  <t-grid-item>
+    <t-cell title="学号：" description="{{studentInfo.shoolId}}" hover />
+  </t-grid-item>
+  <t-grid-item>
+    <t-cell title="入学日期：" description="{{studentInfo.enrollmentTime}}" hover />
+  </t-grid-item>
+  <t-grid-item>
+    <t-cell title="学籍状态：" description="{{studentInfo.status}}" hover />
+  </t-grid-item>
+  <t-grid-item>
+    <t-cell title="形式：" description="{{studentInfo.form}}" hover />
+  </t-grid-item>
+</t-grid>

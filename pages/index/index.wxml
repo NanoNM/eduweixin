@@ -1,1 +1,44 @@
-<text>index</text>
+<t-grid style="margin-top: 7%;" class="block" column="{{2}}">
+  <t-grid-item>
+  <div >
+    <t-cell style="background-color: darkturquoise;border-radius: 10px;" title="当期课表" bindtap="jamp2Curriculum" description="跳转到课表" leftIcon="lock-on" hover arrow />
+  </div>
+    <!-- <t-cell title="当期课表" bindtap="jamp2Curriculum" description="跳转到课表" leftIcon="lock-on" hover arrow /> -->
+  </t-grid-item>
+  <t-grid-item>
+  <div style="margin-left: 0%;">
+    <t-cell style="background-color:rgb(62, 197, 241);border-radius: 10px;" title="考试计划" bindtap="jamp2Exam" description="跳转到考试" leftIcon="lock-on" hover arrow />
+  </div>
+    <!-- <t-cell title="考试计划" bindtap="jamp2Exam" description="跳转到考试" leftIcon="lock-on" hover arrow /> -->
+  </t-grid-item>
+<!--   
+  <t-cell title="当期课表" bindtap="jamp2Curriculum" description="跳转到课表" leftIcon="lock-on" hover arrow />
+  <t-cell title="考试计划" bindtap="jamp2Exam" description="跳转到考试" leftIcon="lock-on" hover arrow /> -->
+</t-grid>
+
+<t-grid style="" class="block" column="{{2}}">
+  <t-grid-item>
+  <div>
+    <t-cell style="background-color:salmon;border-radius: 10px;" title="我的学籍" bindtap="jamp2eduInfo" description="跳转到学籍" leftIcon="lock-on" hover arrow />
+  </div>
+    <!-- <t-cell title="当期课表" bindtap="jamp2Curriculum" description="跳转到课表" leftIcon="lock-on" hover arrow /> -->
+  </t-grid-item>
+  <t-grid-item>
+  <div style="margin-left: 0%;">
+    <t-cell style="background-color:rgb(98, 223, 152);border-radius: 10px;" title="快速选课" bindtap="jamp2selectCorse" description="跳转到选课" leftIcon="lock-on" hover arrow />
+  </div>
+    <!-- <t-cell title="考试计划" bindtap="jamp2Exam" description="跳转到考试" leftIcon="lock-on" hover arrow /> -->
+  </t-grid-item>
+</t-grid>
+
+<t-grid style="" class="block" column="{{1}}">
+  <t-grid-item>
+  <text>教务公告</text>
+    <div style="height: 300px; overflow: scroll; border-radius: 30px;padding: 20px;">
+      <block wx:for="{{notices}}" wx:for-index="index" wx:for-item="notices" wx:key="index">
+        <t-cell class="notice" title="{{notices.title}}" description="{{notices.content}}" hover />
+      </block>
+    </div>
+  </t-grid-item>
+</t-grid>
+

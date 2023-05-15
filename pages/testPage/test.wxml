@@ -1,2 +1,44 @@
-<!--pages/testPage/test.wxml-->
-<text>pages/testPage/test.wxml</text>
+<t-collapse theme="card" defaultValue="{{[0]}}" expandMutex expandIcon>
+<text>我的考试通知</text>
+  <t-collapse-panel header="考试通知（班级）" value="{{0}}">
+    <t-cell-group theme="card">
+    <block wx:for="{{classExamNotification}}" wx:for-index="index" wx:for-item="classExam" wx:key="index">
+      <t-cell leftIcon="view-module" title="{{classExam.name}}" description="{{'位置：' + classExam.examLocal}} {{' 时间：' +classExam.startTime}}" hover />
+
+      <!-- <t-cell  title="{{classExam.name +' 位置: ' + classExam.examLocal + ' 时间：' +classExam.startTime}}"  leftIcon="view-module" hover  /> -->
+    </block>
+    </t-cell-group>
+  </t-collapse-panel>
+
+  <!-- <t-collapse-panel header="考试通知（系）" value="{{1}}">
+    <t-cell-group theme="card">
+      <t-cell  title="API暂停使用"  leftIcon="view-module" hover  />
+    <block wx:for="{{studentsData}}" wx:for-index="index" wx:for-item="student" wx:key="index">
+      <t-cell  title="{{student.name}}"  leftIcon="view-module" hover  />
+    </block>
+    </t-cell-group>
+  </t-collapse-panel> -->
+
+  <!-- <t-collapse-panel header="考试通知（年级）" value="{{2}}">
+    <t-cell-group theme="card">
+      <t-cell  title="API暂停使用"  leftIcon="view-module" hover  />
+    <block wx:for="{{studentsData}}" wx:for-index="index" wx:for-item="student" wx:key="index">
+      <t-cell  title="{{student.name}}"  leftIcon="view-module" hover  />
+    </block>
+    </t-cell-group>
+  </t-collapse-panel> -->
+</t-collapse>
+
+<t-collapse  theme="card" defaultValue="{{[0]}}" expandMutex expandIcon>
+<text>我的成绩</text>
+  <t-collapse-panel header="我的成绩" value="{{0}}">
+
+    <block wx:for="{{myExamResults}}" wx:for-index="index" wx:for-item="myExamResult" wx:key="index">
+
+      <t-cell  title="{{myExamResult.name}} "  leftIcon="view-module" hover description="分数：{{myExamResult.score}};  阅卷人：{{myExamResult.examMarker}}" />
+    </block>
+  </t-collapse-panel>
+  <t-cell title="" leftIcon="" hover  />
+    <t-cell title="" leftIcon="" hover  />
+    <t-cell title="" leftIcon="" hover  />
+</t-collapse>

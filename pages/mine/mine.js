@@ -13,7 +13,19 @@ Page({
     userID: '0000001',
     grade: 'none',
     dept:'none',
-    class: 'none'
+    class: 'none',
+    img1: 'https://tdesign.gtimg.com/miniprogram/images/avatar1.png',
+  },
+
+  myClass(){
+    wx.redirectTo({
+      url: '/pages/myclass/my_class',
+    })
+  },
+  myInfo(){
+    wx.navigateTo({
+      url: '/pages/mine/student-reg-info/info',
+    })
   },
 
   logOut(){

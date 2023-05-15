@@ -62,7 +62,7 @@ Page({
         let config = {
           method: 'get',
           maxBodyLength: Infinity,
-          url: 'http://localhost:8080/class/joinclass?class=' + that.data.class.value,
+          url: app.globalData.baseURL + '/class/joinclass?class=' + that.data.class.value,
           headers: {
             'token': res.data
           }
@@ -75,15 +75,18 @@ Page({
                 key: "classid",
                 data: that.data.class.value
               })
-
-              wx.switchTab({
-                url: '/pages/index/index',
-              })
-
+              app.logOut();
             }
           })
           .catch((error) => {
-            console.log(error);
+            wx.showToast({
+              title: '登录失效返回登录界面',
+              complete(){
+                if (error.response.data['statusCode'] == 'INVALID_LOGIN'){
+                  app.logOut();
+                }
+              }
+            })            
           });
       },
       fail(res) {
@@ -106,7 +109,7 @@ Page({
     let config2 = {
       method: 'get',
       maxBodyLength: Infinity,
-      url: 'http://localhost:8080/class/classes?grade=' + this.data.garde.value + '&dept=' + this.data.dept.value,
+      url: app.globalData.baseURL + '/class/classes?grade=' + this.data.garde.value + '&dept=' + this.data.dept.value,
       headers: {}
     };
 
@@ -150,7 +153,7 @@ Page({
     let config = {
       method: 'get',
       maxBodyLength: Infinity,
-      url: 'http://localhost:8080/grades?status=normal',
+      url: app.globalData.baseURL + '/grades?status=normal',
       headers: {}
     };
     axios.request(config)
@@ -176,7 +179,7 @@ Page({
     let configx = {
       method: 'get',
       maxBodyLength: Infinity,
-      url: 'http://localhost:8080/depts',
+      url: app.globalData.baseURL + '/depts',
       headers: {}
     };
 

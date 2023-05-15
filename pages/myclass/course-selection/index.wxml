@@ -1,0 +1,26 @@
+<!--pages/myclass/course-selection/index.wxml-->
+
+<t-collapse  theme="card" defaultValue="{{[0]}}" expandMutex expandIcon>
+
+  <t-collapse-panel header="专业选修" value="{{0}}">
+    <t-button theme="light" size="large" variant="outline" block>提交</t-button>
+
+    <t-checkbox-group t-class="theme-card" default-value="{{[]}}">
+      <t-checkbox value="1" label="Python程序设计" />
+      <t-checkbox value="2" label="Java程序设计" />
+      <t-checkbox value="3" label="数据结构与算法" />
+    </t-checkbox-group>  
+  </t-collapse-panel>
+  <t-collapse-panel header="公共选修" value="{{0}}">
+    <t-button theme="light" size="large" variant="outline" block>提交</t-button>
+
+    <t-checkbox-group t-class="theme-card" default-value="{{[]}}">
+      <t-checkbox value="1" label="艺术鉴赏" />
+      <t-checkbox value="2" label="古典文学赏析" />
+      <t-checkbox value="3" label="计算机基础" />
+    </t-checkbox-group> 
+  </t-collapse-panel>
+    <t-cell title="" leftIcon="" hover  />
+    <t-cell title="" leftIcon="" hover  />
+    <t-cell title="" leftIcon="" hover  />
+</t-collapse>

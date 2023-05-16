@@ -17,20 +17,47 @@
     </t-cell-group>
   </t-collapse-panel>
 </t-collapse>
-
 <t-collapse  theme="card" defaultValue="{{[0]}}" expandMutex expandIcon>
 
   <t-collapse-panel header="我的课程" value="{{0}}">
     <t-cell-group theme="card">
       <t-cell bindtap="jamp2Select" title="前去选课" leftIcon="add" hover arrow />
     </t-cell-group>
-    <t-cell title="形势与政策 必修" leftIcon="check" hover  />
-    <t-cell title="C语言程序设计 专业必修" leftIcon="check" hover  />
-    <t-cell title="艺术鉴赏 选修" leftIcon="check" hover  />
-    <t-cell title="电子竞技 选修 (被驳回) 点击删除" leftIcon="error" hover  />
-    <t-cell title="运动健康 选修 (审核中)" leftIcon="help" hover  />
+
+    <t-cell-group theme="card" >
+      <t-collapse  theme="card" defaultValue="{{[0]}}" expandMutex expandIcon>
+
+      <t-collapse-panel header="公共必修" value="{{1}}">
+        <block wx:for="{{myCourse.publicRequired}}" wx:for-index="index" wx:for-item="myCourse" wx:key="index">
+          <t-cell  title="{{myCourse.courseName}}"  leftIcon="check" hover  />
+        </block>
+      </t-collapse-panel>
+
+      <t-collapse-panel header="专业必修" value="{{2}}">
+        <block wx:for="{{myCourse.majorRequired}}" wx:for-index="index" wx:for-item="myCourse" wx:key="index">
+          <t-cell  title="{{myCourse.courseName}}"  leftIcon="check" hover  />
+        </block>
+      </t-collapse-panel>
+
+      <t-collapse-panel header="我的选修" value="{{3}}">
+        <t-cell bindtap="deleteSelected" title="删除被驳回的课程" leftIcon="close" hover arrow />
+
+        <block wx:for="{{selectivelyCourseRes}}" wx:for-index="index" wx:for-item="myCourse" wx:key="index">
+          <t-cell bindtap="deleteSelected" title="{{myCourse.course.courseName}}；{{myCourse.course.deptId == 0?'公共课程':'专业课程'}}；{{myCourse.status == 0?'申请中':myCourse.status == 1?'驳回':myCourse.status == 2?'批准':'异常'}}" 
+
+          leftIcon="{{myCourse.status == 0?'help':myCourse.status == 1?'error':myCourse.status == 2?'check':'close'}}" hover  />
+        </block>
+      </t-collapse-panel>
+      </t-collapse>
+
+      
+      
+
+    </t-cell-group>
+    
   </t-collapse-panel>
-    <t-cell title="" leftIcon="" hover  />
-    <t-cell title="" leftIcon="" hover  />
-    <t-cell title="" leftIcon="" hover  />
+  
 </t-collapse>
+<t-cell title="" leftIcon="" hover  />
+    <t-cell title="" leftIcon="" hover  />
+    <t-cell title="" leftIcon="" hover  />

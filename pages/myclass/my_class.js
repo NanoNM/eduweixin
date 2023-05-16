@@ -14,7 +14,48 @@ Page({
     gardname:'null',
 
     studentsData:'',
-    counsellor:''
+    counsellor:'',
+
+    myCourse:{
+      publicRequired:[],
+      majorRequired:[]
+    },
+    selectivelyCourse:{
+      public:[],
+      major:[]
+    },
+
+    selectivelyCourseRes:[
+      {
+        course:'',
+        status:''
+      }
+    ]
+
+
+  },
+
+  deleteSelected(){
+    wx.getStorage({
+      key:'userInfo',
+      success(res){
+        let config = {
+          method: 'get',
+          maxBodyLength: Infinity,
+          url: 'http://localhost:8080/student/selected/rejected/remove?stu='+res.data.id,
+          headers: { }
+        };
+        
+        axios.request(config)
+        .then((response) => {
+          console.log(JSON.stringify(response.data));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+        
+      }
+    })
   },
 
   jamp2Curriculum(){
@@ -77,7 +118,7 @@ Page({
           that.setData({
             studentsData: response.data['data']
           })
-          console.log(that.data.studentsData);
+
         })
         .catch((error) => {
           console.log(error);
@@ -104,6 +145,86 @@ Page({
         
       }
     })
+
+    // 
+    wx.getStorage({
+      
+      key:'classid',
+      success(res){
+        let config1 = {
+          method: 'get',
+          maxBodyLength: Infinity,
+          url: 'http://localhost:8080/admin/course?classid='+res.data,
+          headers: { }
+        };
+        
+        axios.request(config1)
+        .then((response) => {
+          let publicCourse = response.data.data.normal
+          let majorCourse = response.data.data.dept
+    
+          let publicRequired = []
+          let publicSelective = []
+          publicCourse.forEach(element => {
+            if (element.publicRequired == 1) {
+              publicRequired.push(element)
+            }else{
+              publicSelective.push(element)
+            }
+          });
+    
+          let majorRequired = []
+          let majoSelective = []
+          majorCourse.forEach(element => {
+            if (element.publicRequired == 1) {
+              majorRequired.push(element)
+            }else{
+              majoSelective.push(element)
+            }
+          });
+    
+          that.setData({
+            myCourse:{
+              publicRequired:publicRequired,
+              majorRequired:majorRequired
+            },
+            selectivelyCourse:{
+              public:publicSelective,
+              major:majoSelective
+            }
+          })
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      }
+    })
+
+    // 
+
+    wx.getStorage({
+      key:'userInfo',
+      success(res){
+        let config = {
+          method: 'get',
+          maxBodyLength: Infinity,
+          url: 'http://localhost:8080/student/selected/get?stu='+res.data.id,
+          headers: { }
+        };
+        
+        axios.request(config)
+        .then((response) => {
+          console.log(JSON.stringify(response.data.data));
+          that.setData({
+            selectivelyCourseRes:response.data.data
+          })
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      }
+    })
+
   },
 
   /**

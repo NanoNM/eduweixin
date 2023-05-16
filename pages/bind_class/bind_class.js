@@ -110,7 +110,9 @@ Page({
       method: 'get',
       maxBodyLength: Infinity,
       url: app.globalData.baseURL + '/class/classes?grade=' + this.data.garde.value + '&dept=' + this.data.dept.value,
-      headers: {}
+      headers: {
+        "token":app.globalData.jwtToken
+      }
     };
 
     axios.request(config2)
@@ -180,7 +182,10 @@ Page({
       method: 'get',
       maxBodyLength: Infinity,
       url: app.globalData.baseURL + '/depts',
-      headers: {}
+      headers: {
+        "token":app.globalData.jwtToken
+
+      }
     };
 
     axios.request(configx)

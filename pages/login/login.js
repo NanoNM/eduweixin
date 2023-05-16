@@ -57,6 +57,7 @@ Page({
 
               axios.request(config)
                 .then((response) => {
+                  
                   wx.setStorage({
                     key: 'ms_username',
                     data: response.data['data']['name']

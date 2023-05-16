@@ -42,8 +42,11 @@ Page({
         let config = {
           method: 'get',
           maxBodyLength: Infinity,
-          url: 'http://localhost:8080/student/selected/create?stu='+res.data.id+'&course='+allValue,
-          headers: { }
+          url: app.globalData.baseURL + '/student/selected/create?stu='+res.data.id+'&course='+allValue,
+          headers: { 
+            "token":app.globalData.jwtToken
+
+          }
         };
 
         axios.request(config)
@@ -87,8 +90,11 @@ Page({
         let config = {
           method: 'get',
           maxBodyLength: Infinity,
-          url: 'http://localhost:8080/admin/course?classid='+res.data,
-          headers: { }
+          url: app.globalData.baseURL + '/admin/course?classid='+res.data,
+          headers: { 
+            "token":app.globalData.jwtToken
+
+          }
         };
         
         axios.request(config)

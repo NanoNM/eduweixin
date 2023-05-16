@@ -68,17 +68,20 @@ Page({
    wx.getStorage({
     key: 'jwtToken',
     success (res) {
+      app.globalData.jwtToken = res.data
+
       let config = {
         method: 'get',
         maxBodyLength: Infinity,
-        url: 'http://localhost:8080/admin/edunotices',
+        url: app.globalData.baseURL + '/admin/edunotices',
         headers: {
-
+            "token":app.globalData.jwtToken
          }
       };
       
       axios.request(config)
       .then((response) => {
+        console.log(app.globalData.jwtToken);
         that.setData({
           notices:response.data["data"]
         })

@@ -42,8 +42,11 @@ Page({
         let config = {
           method: 'get',
           maxBodyLength: Infinity,
-          url: 'http://localhost:8080/student/selected/rejected/remove?stu='+res.data.id,
-          headers: { }
+          url: app.globalData.baseURL + '/student/selected/rejected/remove?stu='+res.data.id,
+          headers: { 
+            "token":app.globalData.jwtToken
+
+          }
         };
         
         axios.request(config)
@@ -111,7 +114,10 @@ Page({
           method: 'get',
           maxBodyLength: Infinity,
           url: app.globalData.baseURL + '/student/getStudents?classid='+res.data,
-          headers: { }
+          headers: {
+                        "token":app.globalData.jwtToken
+
+           }
         };
         axios.request(config1)
         .then((response) => {
@@ -130,7 +136,10 @@ Page({
       method: 'get',
       maxBodyLength: Infinity,
       url: app.globalData.baseURL + '/class/getcounsellor?id='+res.data,
-      headers: { }
+      headers: {
+        "token":app.globalData.jwtToken
+
+       }
     };
 
     axios.request(config)
@@ -154,8 +163,11 @@ Page({
         let config1 = {
           method: 'get',
           maxBodyLength: Infinity,
-          url: 'http://localhost:8080/admin/course?classid='+res.data,
-          headers: { }
+          url: app.globalData.baseURL + '/admin/course?classid='+res.data,
+          headers: {
+            "token":app.globalData.jwtToken
+
+           }
         };
         
         axios.request(config1)
@@ -208,8 +220,11 @@ Page({
         let config = {
           method: 'get',
           maxBodyLength: Infinity,
-          url: 'http://localhost:8080/student/selected/get?stu='+res.data.id,
-          headers: { }
+          url: app.globalData.baseURL + '/student/selected/get?stu='+res.data.id,
+          headers: { 
+            "token":app.globalData.jwtToken
+
+          }
         };
         
         axios.request(config)

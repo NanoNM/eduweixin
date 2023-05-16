@@ -46,7 +46,10 @@ Page({
           method: 'get',
           maxBodyLength: Infinity,
           url: app.globalData.baseURL + '/exam/exam?class='+res.data,
-          headers: { }
+          headers: {
+            "token":app.globalData.jwtToken
+
+           }
         };
         axios.request(config)
         .then((response) => {
@@ -63,8 +66,10 @@ Page({
       let config = {
         method: 'get',
         maxBodyLength: Infinity,
-        url: 'http://localhost:8080/exam/getResults?studentid=' + app.globalData.userInfo.employeeId,
-        headers: { }
+        url: app.globalData.baseURL + '/exam/getResults?studentid=' + app.globalData.userInfo.employeeId,
+        headers: {
+          "token":app.globalData.jwtToken
+         }
       };
       
       axios.request(config)

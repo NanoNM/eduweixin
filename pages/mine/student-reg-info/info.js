@@ -36,8 +36,11 @@ Page({
     let config = {
       method: 'get',
       maxBodyLength: Infinity,
-      url: 'http://localhost:8080/student/moreInfo?stid='+app.globalData.userInfo.employeeId,
-      headers: { }
+      url: app.globalData.baseURL + '/student/moreInfo?stid='+app.globalData.userInfo.employeeId,
+      headers: {
+        "token":app.globalData.jwtToken
+
+       }
     };
     
     axios.request(config)

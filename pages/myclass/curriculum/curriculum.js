@@ -72,7 +72,9 @@ Page({
     wx.request({
       url: app.globalData.baseURL + '/grade/optime?grade=uc_2023', //仅为示例，并非真实的接口地址
       header: {
-        'content-type': 'application/json' // 默认值
+        'content-type': 'application/json', // 默认值
+        "token":app.globalData.jwtToken
+
       },
       success(res) {
         console.log(that.data.schoolTime)
@@ -153,7 +155,10 @@ Page({
           method: 'get',
           maxBodyLength: Infinity,
           url: app.globalData.baseURL + '/course/get?classid=' + res.data + '&nowweek=' + that.getNowWeek(),
-          headers: {}
+          headers: {
+            "token":app.globalData.jwtToken
+
+          }
         };
 
         axios.request(config)
